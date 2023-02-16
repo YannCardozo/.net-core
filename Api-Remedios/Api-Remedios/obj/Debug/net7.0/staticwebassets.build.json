@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "9BXbNVd3cVCPPxpP85dShVHdIqJZBdga8KLEvCl2eMk=",
+  "Source": "Api-Remedios",
+  "BasePath": "_content/Api-Remedios",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
