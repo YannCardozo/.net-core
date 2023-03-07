@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Yann S.O\\Desktop\\REPOSITORIO YANN\\Api-Remedios\\Api-Remedios\\Api-Remedios\\Api-Remedios.csproj": {}
+    "C:\\Users\\Yann S.O\\Desktop\\REPOSITORIO YANN\\net-core\\Api-Remedios\\Api-Remedios\\Api-Remedios.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Yann S.O\\Desktop\\REPOSITORIO YANN\\Api-Remedios\\Api-Remedios\\Api-Remedios\\Api-Remedios.csproj": {
+    "C:\\Users\\Yann S.O\\Desktop\\REPOSITORIO YANN\\net-core\\Api-Remedios\\Api-Remedios\\Api-Remedios.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Yann S.O\\Desktop\\REPOSITORIO YANN\\Api-Remedios\\Api-Remedios\\Api-Remedios\\Api-Remedios.csproj",
+        "projectUniqueName": "C:\\Users\\Yann S.O\\Desktop\\REPOSITORIO YANN\\net-core\\Api-Remedios\\Api-Remedios\\Api-Remedios.csproj",
         "projectName": "Api-Remedios",
-        "projectPath": "C:\\Users\\Yann S.O\\Desktop\\REPOSITORIO YANN\\Api-Remedios\\Api-Remedios\\Api-Remedios\\Api-Remedios.csproj",
+        "projectPath": "C:\\Users\\Yann S.O\\Desktop\\REPOSITORIO YANN\\net-core\\Api-Remedios\\Api-Remedios\\Api-Remedios.csproj",
         "packagesPath": "C:\\Users\\Yann S.O\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Yann S.O\\Desktop\\REPOSITORIO YANN\\Api-Remedios\\Api-Remedios\\Api-Remedios\\obj\\",
+        "outputPath": "C:\\Users\\Yann S.O\\Desktop\\REPOSITORIO YANN\\net-core\\Api-Remedios\\Api-Remedios\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

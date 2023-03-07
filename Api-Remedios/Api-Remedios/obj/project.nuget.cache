@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "OmW80S4CHyW9nznP9tfwl6fLpikNmdcisaWELYQyR/rRNCBWHaQSiMROP7icSe2LILb3Cqaz8rOtxIKDNhTTfQ==",
+  "dgSpecHash": "BJhI9hMsyI4YKBwh6RKuprUySX6KNe8IR5qfst4lUvKavp0PaZRgHwD3HVe+9MtqNtvqjoNrKdc/zgKOW98FdQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Yann S.O\\Desktop\\REPOSITORIO YANN\\Api-Remedios\\Api-Remedios\\Api-Remedios\\Api-Remedios.csproj",
+  "projectFilePath": "C:\\Users\\Yann S.O\\Desktop\\REPOSITORIO YANN\\net-core\\Api-Remedios\\Api-Remedios\\Api-Remedios.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Yann S.O\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\Yann S.O\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
