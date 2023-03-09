@@ -14,5 +14,8 @@ namespace Api_Remedios.Data
         }
         //Server=localhost\SQLEXPRESS;Database=master;Trusted_Connection=True;
         public DbSet<Remedios> Remedios { get; set; }
+        public DbSet<Unidades> Unidades { get; set; }
+        public DbSet<Regiao> Regiao { get; set; }
+
     }
 }
