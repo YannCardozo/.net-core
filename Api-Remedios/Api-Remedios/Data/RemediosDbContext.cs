@@ -1,5 +1,6 @@
-﻿using Api_Remedios.Models;
-using Microsoft.EntityFrameworkCore;
+﻿global using Microsoft.EntityFrameworkCore;
+using Api_Remedios.Models;
+
 
 namespace Api_Remedios.Data
 {
@@ -10,12 +11,12 @@ namespace Api_Remedios.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=Master;Trusted_Connection=true;TrustServerCertificate=true;");
+            optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=master;Trusted_Connection=True;TrustServerCertificate=true;");
         }
         //Server=localhost\SQLEXPRESS;Database=master;Trusted_Connection=True;
-        public DbSet<Remedios> Remedios { get; set; }
-        public DbSet<Unidades> Unidades { get; set; }
-        public DbSet<Regiao> Regiao { get; set; }
+        public DbSet<Remedios> Remedios => Set<Remedios>();
+        public DbSet<Unidades> Unidades => Set<Unidades>();
+        public DbSet<Regiao> Regiao => Set<Regiao>();
 
     }
 }

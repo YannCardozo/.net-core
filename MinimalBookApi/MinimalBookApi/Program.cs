@@ -21,7 +21,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/GetAll", async (DataContext context) =>
+app.MapGet("/GetAll", async (DataContext context) => 
 
     await context.Books.ToListAsync());
 
@@ -45,7 +45,7 @@ app.MapPut("/update/{id}", async (DataContext context, Book updatedBook, int id)
     var book = await context.Books.FindAsync(id);
     if (book is null)
     {
-        return Results.NotFound("Livro não encontrado");
+        return Results.NotFound("Livro: " + id + "não encontrado");
     }
     book.Title = updatedBook.Title;
     book.Author = updatedBook.Author;

@@ -6,14 +6,13 @@ using System;
 using System.Net.Http;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<RemediosDbContext>(opt => opt.UseSqlServer(builder.Configuration["ConnectionStrings:DefaaultConnection"]));
-builder.Services.AddDbContext<UnidadesDbContext>(opt => opt.UseSqlServer(builder.Configuration["ConnectionStrings:DefaaultConnection"]));
-builder.Services.AddDbContext<RegiaoDbContext>(opt => opt.UseSqlServer(builder.Configuration["ConnectionStrings:DefaaultConnection"]));
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddDbContext<RemediosDbContext>();
+// Add services to the container.
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
+//builder.Services.AddDbContext<DataContext>();
 
 
 
@@ -43,10 +42,69 @@ var Unidades = new List<Unidades>
     new Unidades {Id = 1, Nome = "Mario Monteiro"}
 };
 
-app.MapGet("/remedios", () =>
-{
 
-    return remedios;
+/*
+app.MapGet("/GetAll", async (DataContext context) =>
+
+    await context.Books.ToListAsync());
+
+
+
+app.MapGet("/get/{id}", async (DataContext context, int id) =>
+    await context.Books.FindAsync(id) is Book book ?
+        Results.Ok(book) : Results.NotFound("Livro não encontrado."));
+
+
+app.MapPost("/post", async (DataContext context , Book book) => {
+
+    context.Books.Add(book);
+    await context.SaveChangesAsync();
+    return Results.Ok(await context.Books.ToListAsync());
+
+});
+
+app.MapPut("/update/{id}", async (DataContext context, Book updatedBook, int id) => {
+   
+    var book = await context.Books.FindAsync(id);
+    if (book is null)
+    {
+        return Results.NotFound("Livro: " + id + "não encontrado");
+    }
+    book.Title = updatedBook.Title;
+    book.Author = updatedBook.Author;
+    await context.SaveChangesAsync();
+
+
+    return Results.Ok(await context.Books.ToListAsync());
+});
+
+app.MapDelete("/delete/{id}", async (DataContext context, int id) => {
+    var book = await context.Books.FindAsync(id);
+    if (book is null)
+    {
+        return Results.NotFound("Livro não encontrado");
+    }
+
+    context.Books.Remove(book);
+    await context.SaveChangesAsync();
+
+
+    return Results.Ok(await context.Books.ToListAsync());
+});
+ */
+
+
+app.MapGet("/remedios", async (RemediosDbContext context) =>
+{
+    var remedios = await context.Remedios.ToListAsync();
+    if(remedios == null)
+    {
+
+        return Results.NotFound("Não existem remédios cadastrados ou com valor tangível.");  //"Não Localizado";
+
+    }
+
+    return Results.Ok(remedios);
 });
 
 app.MapGet("/remedios/{id}", (int id) =>
@@ -77,6 +135,34 @@ app.MapPost($"/remedios/", (Remedios remedio) =>
 
 });
 
+
+
+
+app.MapGet("/Files/UploadFiles", async (IFormFile file ) =>
+{
+
+    string filepatch = "upload/" + file.FileName;
+    using var stream = File.OpenWrite(filepatch);
+    await file.CopyToAsync(stream);
+    if(file == null)
+    {
+
+        return Results.BadRequest("Sem fotos a enviar");
+    }
+    return Results.Ok(file);
+    // if (!request.Form.Files.Any())
+    //     return Results.BadRequest("Precisa enviar um arquivo");
+    // foreach(var file in request.Form.Files)
+    // {
+    //    using(var stream = new FileStream(@"c:\Temp\UploadedFiles" + file.FileName,FileMode.Create))
+    //    {
+    //        file.CopyTo(stream);
+    //     }
+    /// }
+    // return Results.Ok("arquivo enviado com sucesso");
+
+});
+
 app.MapPost("/Files/UploadFiles", async (IFormFile file ) =>
 {
 
@@ -84,16 +170,19 @@ app.MapPost("/Files/UploadFiles", async (IFormFile file ) =>
     using var stream = File.OpenWrite(filepatch);
     await file.CopyToAsync(stream);
 
-   // if (!request.Form.Files.Any())
-   //     return Results.BadRequest("Precisa enviar um arquivo");
-   // foreach(var file in request.Form.Files)
-   // {
+
+
+
+    // if (!request.Form.Files.Any())
+    //     return Results.BadRequest("Precisa enviar um arquivo");
+    // foreach(var file in request.Form.Files)
+    // {
     //    using(var stream = new FileStream(@"c:\Temp\UploadedFiles" + file.FileName,FileMode.Create))
     //    {
     //        file.CopyTo(stream);
-   //     }
-   /// }
-   // return Results.Ok("arquivo enviado com sucesso");
+    //     }
+    /// }
+    // return Results.Ok("arquivo enviado com sucesso");
 
 });
 

@@ -22,6 +22,22 @@ namespace Api_Remedios.DataAccess.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Api_Remedios.Models.Regiao", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Regiao");
+                });
+
             modelBuilder.Entity("Api_Remedios.Models.Remedios", b =>
                 {
                     b.Property<int>("Id")
@@ -30,11 +46,26 @@ namespace Api_Remedios.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Descricao")
+                    b.Property<int>("Codigo")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Codigo_ANS")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Cor")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Data_deposito")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Data_lote")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("Hora_Cadastro")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Img_Remedio")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Link_Bula")
                         .HasColumnType("nvarchar(max)");
@@ -42,9 +73,56 @@ namespace Api_Remedios.DataAccess.Migrations
                     b.Property<string>("Nome")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("Nome_RegiaoId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Nome_UnidadeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Tipo_remedio")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Vaga_lote")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("Nome_RegiaoId");
+
+                    b.HasIndex("Nome_UnidadeId");
+
                     b.ToTable("Remedios");
+                });
+
+            modelBuilder.Entity("Api_Remedios.Models.Unidades", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Unidades");
+                });
+
+            modelBuilder.Entity("Api_Remedios.Models.Remedios", b =>
+                {
+                    b.HasOne("Api_Remedios.Models.Regiao", "Nome_Regiao")
+                        .WithMany()
+                        .HasForeignKey("Nome_RegiaoId");
+
+                    b.HasOne("Api_Remedios.Models.Unidades", "Nome_Unidade")
+                        .WithMany()
+                        .HasForeignKey("Nome_UnidadeId");
+
+                    b.Navigation("Nome_Regiao");
+
+                    b.Navigation("Nome_Unidade");
                 });
 #pragma warning restore 612, 618
         }

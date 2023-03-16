@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "CrlFc9uScAsooNsUG4oY4Ho5uI+JWY0L8v7wantK7E44cBo4w4OW0ZYKHeXqKq3FZ+xnz4H9oKOWu8I/WCvVMQ==",
+  "dgSpecHash": "R4Z6c4NnlvPQYgZOs58jMH+IxOHNvQLiaq7OQFigeik3UydSHvJj3hqjR5M4rqot9h0N7YPPkpuIaBYxjffDmA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Yann S.O\\Desktop\\Nova pasta\\net-core\\MinimalBookApi\\MinimalBookApi\\MinimalBookApi.csproj",
+  "projectFilePath": "C:\\Users\\Yann S.O\\Desktop\\REPOSITORIO YANN\\net-core\\MinimalBookApi\\MinimalBookApi\\MinimalBookApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Yann S.O\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\Yann S.O\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
