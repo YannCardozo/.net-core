@@ -1,9 +1,11 @@
+global using Api_Remedios.Models;
+using Api_Remedios;
 using Api_Remedios.Data;
-using Api_Remedios.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Net.Http;
+using static System.Reflection.Metadata.BlobBuilder;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
@@ -30,7 +32,11 @@ app.UseHttpsRedirection();
 
 
 
+var remedios = new List<Remedios> {};
 
+var Unidades = new List<Unidades> {};
+
+/*
 var remedios = new List<Remedios>
 { 
     new Remedios {Id = 1, Nome ="Novalgina" , Vaga_lote = "Alfa beta gama" , Hora_Cadastro= DateTime.Now ,Link_Bula = ""}
@@ -43,7 +49,7 @@ var Unidades = new List<Unidades>
 };
 
 
-/*
+
 app.MapGet("/GetAll", async (DataContext context) =>
 
     await context.Books.ToListAsync());
@@ -95,45 +101,109 @@ app.MapDelete("/delete/{id}", async (DataContext context, int id) => {
 
 
 app.MapGet("/remedios", async (RemediosDbContext context) =>
-{
-    var remedios = await context.Remedios.ToListAsync();
-    if(remedios == null)
+
+    //var retorno = await context.Remedios.ToListAsync();
+    await context.Remedios.ToListAsync()
+
+);
+
+app.MapGet("/remedios/{id}", async (RemediosDbContext context,int id) =>
+
+    await context.Remedios.FindAsync(id) is Remedios remedio?
+        Results.Ok(remedio) : Results.NotFound("Remédio não encontrado.")
+);
+
+//  var remedio = await context.Remedios.FindAsync(id);
+
+// remedio = remedios.Find(r => r.Id == id);
+
+//  if(remedios == null)
+// {
+//     return Results.NotFound("Remédio: " + remedio.Nome + "(" + remedio.Id + ")" + "não encontrado.");
+//}
+
+// return Results.Ok(remedio);
+
+app.MapPost("/post", async (RemediosDbContext context, Remedios remedio) => {
+
+
+    if (remedio != null && remedio.Nome != "")
     {
-
-        return Results.NotFound("Não existem remédios cadastrados ou com valor tangível.");  //"Não Localizado";
-
+        context.Remedios.Add(remedio);
+        await context.SaveChangesAsync();
+        //return Results.Ok(await context.Remedios.ToListAsync());
+        return Results.Created($"/post/{remedio.Id}", remedio);
     }
 
-    return Results.Ok(remedios);
+    return Results.BadRequest("Nome não digitado ou está em branco.");
+});
+app.MapPost("/upload", async (IFormFile file) =>
+{
+    var tempFile = Path.GetTempFileName();
+    app.Logger.LogInformation(tempFile);
+    using var stream = File.OpenWrite(tempFile);
+    await file.CopyToAsync(stream);
 });
 
-app.MapGet("/remedios/{id}", (int id) =>
+app.MapPost("/upload_many", async (IFormFileCollection myFiles) =>
 {
-    var remedio = remedios.Find(r => r.Id == id);
-
-    if(remedio == null)
+    foreach (var file in myFiles)
     {
-        return Results.NotFound("Nao existe esse remedio de id: " + id);
+        var tempFile = Path.GetTempFileName();
+        app.Logger.LogInformation(tempFile);
+        using var stream = File.OpenWrite(tempFile);
+        await file.CopyToAsync(stream);
     }
-
-    return Results.Json(remedio);
 });
 
-app.MapPost($"/remedios/", (Remedios remedio) => 
+/*
+
+
+ * 
+ * 
+ * 
+app.MapPost("/post", async (RemediosDbContext context, Remedios remedio) => {
+
+    context.Remedios.Add(remedio);
+    await context.SaveChangesAsync();
+    return Results.Ok(await context.Remedios.ToListAsync());
+
+    //return Results.NotFound("nao postado");
+});
+
+app.MapPost($"/remedios/", async (DbContext RemediosDbContext, Remedios remedio) =>
 {
-    if (remedio is not null)
+
+
+    if (remedio != null)
     {
-        remedios.Add(remedio);
-        return Results.Ok(remedio);
+
+        await RemediosDbContext.AddAsync(remedio);
+        await RemediosDbContext.SaveChangesAsync();
+        //return Results.Ok("Remedio cadastrado com sucesso + remedio: " + remedio.Nome);
+
+
+        //await RemediosDbContext.AddAsync(remedio);
+        //await RemediosDbContext.SaveChangesAsync();
+        return Results.Created($"/remedios/{remedio.Id}", remedio);
     }
     else
     {
         return Results.BadRequest("Remedio não encontrado");
     }
 
-
+    // await db.Students.AddAsync(student);
+    // await db.SaveChangesAsync();
 
 });
+
+
+*/
+
+
+
+/*
+
 
 
 
@@ -186,35 +256,76 @@ app.MapPost("/Files/UploadFiles", async (IFormFile file ) =>
 
 });
 
-app.MapPut("/remedios", (Remedios RemediosAtualiza, int id) =>
-{
-    var remedio = remedios.Find(r => r.Id == id);
-    if (remedio is null)
+
+
+
+
+
+app.MapPut("/update/{id}", async (DataContext context, Book updatedBook, int id) => {
+   
+    var book = await context.Books.FindAsync(id);
+    if (book is null)
     {
-        return Results.NotFound("Nao existe esse remedio de id: " + id);
+        return Results.NotFound("Livro: " + id + "não encontrado");
+    }
+    book.Title = updatedBook.Title;
+    book.Author = updatedBook.Author;
+    await context.SaveChangesAsync();
+
+
+    return Results.Ok(await context.Books.ToListAsync());
+});
+*/
+app.MapPut("/update/{id}", async (RemediosDbContext context , Remedios RemediosAtualiza, int id) =>
+{
+    //RemediosAtualiza.Id = id;
+    var remedio = await context.Remedios.FindAsync(id);
+        
+    //remedios.Find(r => r.Id == id);
+
+
+    if(remedio is null && remedio.Nome != "")
+    {
+        return Results.NotFound("Remédio: " + remedio.Nome + "não encontrado.");
     }
 
     remedio.Id = RemediosAtualiza.Id;
     remedio.Nome = RemediosAtualiza.Nome;
     remedio.Link_Bula = RemediosAtualiza.Link_Bula;
 
-    return Results.Ok(remedio);
+    await context.SaveChangesAsync();
+
+    return Results.Created($"/update/{remedio.Id}", remedio);
+    //return Results.Ok(remedio);
 
 });
 
-app.MapDelete("/remedios/{id}",  (int id) =>
+app.MapDelete("/delete/{id}", async (RemediosDbContext context  , int id) =>
 {
-    var remedio = remedios.Find(r =>r.Id == id);
-    if(remedio is null)
+    var remedio = await context.Remedios.FindAsync(id);
+
+    if (remedio is null)
     {
         return Results.NotFound("Nao existe esse remedio de id: " + id);
     }
 
-    remedios.Remove(remedio);
-
-    return Results.Ok(remedio);
-
+    context.Remedios.Remove(remedio);
+    //remedio.Remove(remedio);
+    await context.SaveChangesAsync();
+    return Results.Created($"/delete/{remedio.Id}", remedio);
 });
+
+
+
+
+
+
+
+
+
+
+
+
 
 app.Run();
 

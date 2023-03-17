@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Api_Remedios.DataAccess.Migrations
+namespace Api_Remedios.Migrations
 {
     [DbContext(typeof(RemediosDbContext))]
-    [Migration("20230316173422_RemediosDbContextAtualizacaoDasTabelas")]
-    partial class RemediosDbContextAtualizacaoDasTabelas
+    [Migration("20230316201446_AlterandoMigrationEnderecoParaSQLEXPRESS1")]
+    partial class AlterandoMigrationEnderecoParaSQLEXPRESS1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
