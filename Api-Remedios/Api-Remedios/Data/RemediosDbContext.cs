@@ -13,8 +13,9 @@ namespace Api_Remedios.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS01;Database=master;Trusted_Connection=True;TrustServerCertificate=true;");
-
+            optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=master;Trusted_Connection=True;TrustServerCertificate=true;");
+            //localhost SEMPRE ODONTO optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS01;Database=master;Trusted_Connection=True;TrustServerCertificate=true;");
+            //localhost CASA optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=master;Trusted_Connection=True;TrustServerCertificate=true;");
         }
         //"Server=*nomeservidor*;Database=*nomeDB*;Trust Server Certificate=true;User ID=*usuario*;password=*senha*";
         //Server=localhost\SQLEXPRESS;Database=master;Trusted_Connection=True;

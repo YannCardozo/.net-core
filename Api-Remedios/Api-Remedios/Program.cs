@@ -1,6 +1,8 @@
 global using Api_Remedios.Models;
 using Api_Remedios;
 using Api_Remedios.Data;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,9 +10,15 @@ using System.Net.Http;
 using static System.Reflection.Metadata.BlobBuilder;
 
 var builder = WebApplication.CreateBuilder(args);
+//builder.Services.AddSingleton<RemediosDbContext>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+//builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Remedios>());
+//builder.Services.AddAuthentication();
+//builder.Services.AddAuthorization();
+builder.Services.AddTransient<IValidator<Remedios>, Remedios_Validador>();
 builder.Services.AddDbContext<RemediosDbContext>();
+
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
@@ -124,11 +132,20 @@ app.MapGet("/remedios/{id}", async (RemediosDbContext context,int id) =>
 
 // return Results.Ok(remedio);
 
-app.MapPost("/post", async (RemediosDbContext context, Remedios remedio) => {
+app.MapPost("/post", async (RemediosDbContext context,IValidator<Remedios> Remedios_Validador, Remedios remedio) => {
 
 
     if (remedio != null && remedio.Nome != "")
     {
+        var validationResult = Remedios_Validador.Validate(remedio);
+        if(!validationResult.IsValid)
+        {
+            var erros = validationResult.Errors.Select(x => new { erros = x.ErrorMessage });
+            return Results.BadRequest(erros);
+        }
+
+
+
         context.Remedios.Add(remedio);
         await context.SaveChangesAsync();
         //return Results.Ok(await context.Remedios.ToListAsync());
