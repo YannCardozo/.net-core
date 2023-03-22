@@ -230,3 +230,7 @@ C:\Users\yann_\REPO\Projetos\net-core\Api-Remedios\Api-Remedios\bin\Debug\net7.0
 C:\Users\yann_\REPO\Projetos\net-core\Api-Remedios\Api-Remedios\bin\Debug\net7.0\FluentValidation.dll
 C:\Users\yann_\REPO\Projetos\net-core\Api-Remedios\Api-Remedios\bin\Debug\net7.0\FluentValidation.AspNetCore.dll
 C:\Users\yann_\REPO\Projetos\net-core\Api-Remedios\Api-Remedios\bin\Debug\net7.0\FluentValidation.DependencyInjectionExtensions.dll
+C:\Users\Yann S.O\Desktop\REPOSITORIO YANN\net-core\Api-Remedios\Api-Remedios\bin\Debug\net7.0\FluentValidation.Extensions.Br.dll
+C:\Users\Yann S.O\Desktop\REPOSITORIO YANN\net-core\Api-Remedios\Api-Remedios\bin\Debug\net7.0\FluentValidation.dll
+C:\Users\Yann S.O\Desktop\REPOSITORIO YANN\net-core\Api-Remedios\Api-Remedios\bin\Debug\net7.0\FluentValidation.AspNetCore.dll
+C:\Users\Yann S.O\Desktop\REPOSITORIO YANN\net-core\Api-Remedios\Api-Remedios\bin\Debug\net7.0\FluentValidation.DependencyInjectionExtensions.dll

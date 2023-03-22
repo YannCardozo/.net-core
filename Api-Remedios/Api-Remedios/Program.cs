@@ -135,7 +135,7 @@ app.MapGet("/remedios/{id}", async (RemediosDbContext context,int id) =>
 app.MapPost("/post", async (RemediosDbContext context,IValidator<Remedios> Remedios_Validador, Remedios remedio) => {
 
 
-    if (remedio != null && remedio.Nome != "")
+    if (remedio != null)
     {
         var validationResult = Remedios_Validador.Validate(remedio);
         if(!validationResult.IsValid)

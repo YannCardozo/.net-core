@@ -13,7 +13,7 @@ namespace Api_Remedios.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=master;Trusted_Connection=True;TrustServerCertificate=true;");
+            optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS01;Database=master;Trusted_Connection=True;TrustServerCertificate=true;");
             //localhost SEMPRE ODONTO optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS01;Database=master;Trusted_Connection=True;TrustServerCertificate=true;");
             //localhost CASA optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=master;Trusted_Connection=True;TrustServerCertificate=true;");
         }
@@ -23,7 +23,7 @@ namespace Api_Remedios.Data
         public DbSet<Remedios> Remedios => Set<Remedios>();
         public DbSet<Unidades> Unidades => Set<Unidades>();
         public DbSet<Regiao> Regiao => Set<Regiao>();
-
-    }
+		public DbSet<Cep> Cep => Set<Cep>();
+	}
 
 }
